@@ -224,7 +224,7 @@ prestigecycle()
     rank++;
     if(rank > 10)
     rank = 0;
-    self setRank(59,rank);
+    self setRank(getdvarint("darank"),rank);
     setdvar("prest",rank);
 }
 
