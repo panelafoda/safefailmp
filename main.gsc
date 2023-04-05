@@ -174,6 +174,8 @@ israising()
 
 setdvars()
 {
+    SetDvarIfUni("darank",0);
+    SetDvarIfUni("prest",0);
     self.canspawnheli = true;
     self.innoclip = false;
     self.pers["movpos"] = 0;
