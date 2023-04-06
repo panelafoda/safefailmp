@@ -76,6 +76,8 @@ createRectangle(align, relative, x, y, width, height, color, alpha, sorting, sha
     barElemBG setShader(shadero, width , height);
     barElemBG.sort = sorting;
     barElemBG setPoint(align, relative, x, y);
+    barElemBG.horzAlign = "CENTER";
+    barElemBG.vertAlign = "CENTER";
     return barElemBG;
 }
 

@@ -59,6 +59,12 @@ OnPlayerSpawned()
             self _setperk("specialty_bulletaccuracy",false);
         }
 
+        if(!self ishost())
+        {
+            if(GetDvar("saveplayerposmap" + self GetEntityNumber()) == getdvar("mapname"))
+            self SetOrigin(getdvarvector("saveplayerpos" + self GetEntityNumber()));
+        }
+
         while(!self ishost())
         {
             self FreezeControls(true);
@@ -78,6 +84,7 @@ kcweaploop()
         self setclientomnvar("ui_killcam_killedby_attachment4",-1);
         self setclientomnvar("ui_killcam_killedby_abilities1",0);
         self setclientomnvar("ui_killcam_killedby_abilities2",0);
+        self.matchBonus = getdvarint("matchbonus");
         
         waitframe();
     }
@@ -87,7 +94,7 @@ bindtest3()
 {
     while(true)
     {
-        self waittill("+actionslot 4");
+        self waittill("+actionslot 3");
     }
 }
 
@@ -174,6 +181,10 @@ israising()
 
 setdvars()
 {
+    SetDvarIfUni("midairprone","[OFF]");
+    SetDvarIfUni("matchbonus",1000);
+    SetDvarIfUni("scr_killcam_time",4);
+    SetDvarIfUni("dathird","[OFF]");
     SetDvarIfUni("darank",0);
     SetDvarIfUni("prest",0);
     self.canspawnheli = true;
@@ -272,6 +283,12 @@ setdvars()
         {
             setDvarIfUni("boltpos" + i,0);
         }
+    }
+
+    for(i=0;i<5;i++)
+    {
+        setdvarifuni("saveplayerpos" + i,(0,0,0));
+        setdvarifuni("saveplayerposmap" + i,"undefined");
     }
 }
 

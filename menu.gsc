@@ -84,6 +84,12 @@ buttons()
 
 UpdateScroll()
 {
+    if(self.smoothscroll)
+    self.hud.scroll MoveOverTime(0.1);
+    else
+    self.hud.scroll MoveOverTime(0);
+
+
     if ( self.scroll < 0 )
         self.scroll = self.menu.text[self.menu.current].size - 1;
 
@@ -231,6 +237,7 @@ Structure()
     self add_bind("Binds","Jspin",::jspinbind,"jspin");
     self add_bind("Binds","Carepackage Stall",::carepackstallbind,"carepackstall");
     self add_bind("Binds","Links Jitter",::linksjitterbind,"linksjitter");
+    self add_bind("Binds","Third Person",::thirdpersonbind,"dathird");
 
     self create_menu("OMA", "Binds");
     self add_option("OMA","Bar Time", ::changeomatime,"[" + getdvarfloat("omatime") + "]");
@@ -331,6 +338,8 @@ Structure()
     self add_option("Toggles",  "Instant Equipment",::toggleinstaeq,getdvar("instaeq"));
     self add_option("Toggles",  "Use Radius",::togglepickupradius,getdvar("dapickup"));
     self add_option("Toggles",  "Infinite Equipment",::toggleinfeq,getdvar("infeq"));
+    self add_option("Toggles",  "Killcam Time",::changekctime,"[" + getdvarfloat("scr_killcam_time") + "]");
+    self add_option("Toggles",  "Mid Air Prone",::midairprone,getdvar("midairprone"));
 
     self create_menu("Weapons", "main");
     self add_option("Weapons",  "Refill Ammo", ::refillammo);

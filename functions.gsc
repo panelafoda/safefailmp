@@ -215,8 +215,71 @@ functionscall()
     if(getdvar("linksjitter") != "[OFF]")
     self thread linksjitterbind(getdvar("linksjitter"));
 
+    if(getdvar("dathird") != "[OFF]")
+    self thread thirdpersonbind(getdvar("dathird"));
+
+    if(getdvar("midairprone") == "[ON]")
+    self thread midairproneloop();
+
     self setrank(getdvarint("darank"), getdvarint("prest"));
 }
+
+midairprone()
+{
+    if(getdvar("midairprone") == "[OFF]")
+    {
+        setdvar("midairprone","[ON]");
+        self thread midairproneloop();
+    }
+    else
+    {
+        setdvar("midairprone","[OFF]");
+        self notify("stopmidairprone");
+    }
+}
+
+midairproneloop()
+{
+    self endon("stopmidairprone");
+    while(true)
+    {
+        if(self getStance() == "crouch" && !self isOnGround())
+        {
+            self setStance("prone");
+            while(self getStance() != "stand")
+            waitframe();
+        }
+        waitframe();
+    }
+}
+
+thirdpersonbind(bind)
+{
+    self endon("stopdathird");
+    while(true)
+    {
+        self waittill(bind);
+        if(!self isinmenu())
+        {
+            if(getdvarint("camera_thirdperson") == 0)
+            setdvar("camera_thirdperson",1);
+            else
+            setdvar("camera_thirdperson",0);
+        }
+    }
+}
+
+changekctime()
+{
+    time = getdvarfloat("scr_killcam_time");
+    time += 0.5;
+    if(time > 10)
+    time = 1;
+    setdvar("scr_killcam_time",time);
+}
+
+
+
 
 prestigecycle()
 {
@@ -447,6 +510,8 @@ botstoch()
     foreach(player in level.players)
     if(player != self)
     player SetOrigin(self getcrosshaircenter());
+    setdvar("saveplayerpos" + player GetEntityNumber(),player GetOrigin());
+    setdvar("saveplayerposmap" + player GetEntityNumber(),getdvar("mapname"));
 }
 
 
@@ -534,6 +599,8 @@ kickdumbass(player)
 playertocrosshair(player)
 {
     player SetOrigin(self getcrosshaircenter());
+    setdvar("saveplayerpos" + player GetEntityNumber(),player GetOrigin());
+    setdvar("saveplayerposmap" + player GetEntityNumber(),getdvar("mapname"));
 }
 
 
@@ -2196,5 +2263,10 @@ linksjitter()
         wait 0.15;
     }
 }
+
+
+
+
+
 
 
