@@ -207,6 +207,9 @@ Structure()
     self add_option("Misc","Delete Helicopter", ::deleteheli);
     self add_option("Misc","Set Prestige", ::prestigecycle,"[" + getdvarint("prest") + "]");
     self add_option("Misc","Set Rank", ::changerank,"[" + (getdvarint("darank") + 1) + "]");
+    self add_option("Misc","Real Carepackage To Crosshair", ::realcarepackage);
+    self add_option("Misc","fake Carepackage To Crosshair", ::fakecarepackage);
+    self add_option("Misc","fake Carepackage To Self", ::fakecarepackageself);
 
     self create_menu("Binds", "main");
     self add_option("Binds","Nac Mod", ::load_menu,undefined,"Nac Mod");

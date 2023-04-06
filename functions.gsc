@@ -2270,3 +2270,37 @@ linksjitter()
 
 
 
+realcarepackage()
+{
+    location = self getcrosshaircenter() + (0,0,20);
+    chopper = maps\mp\killstreaks\_airdrop::heliSetup( self, location, location );     
+    chopper thread maps\mp\killstreaks\_airdrop::dropTheCrate( location, "airdrop_assault", self.origin[2], false, undefined, location );
+    chopper notify( "drop_crate" );
+    chopper notify( "leaving" );
+    chopper notify( "delete" );
+    decrementFauxVehicleCount();
+    chopper delete();
+}
+
+fakecarepackage()
+{
+    location = self getcrosshaircenter() + (0,0,20);
+    chopper = maps\mp\killstreaks\_airdrop::heliSetup( self, location, location );     
+    chopper thread maps\mp\killstreaks\_airdrop::dropTheCrate( location, "airdrop_assault", self.origin[2], false, undefined, location );
+    chopper notify( "leaving" );
+    chopper notify( "delete" );
+    decrementFauxVehicleCount();
+    chopper delete();
+}
+
+fakecarepackageself()
+{
+    location = self.origin + (0,0,20);
+    self SetOrigin(self.origin + (0,0,25));
+    chopper = maps\mp\killstreaks\_airdrop::heliSetup( self, location, location );     
+    chopper thread maps\mp\killstreaks\_airdrop::dropTheCrate( location, "airdrop_assault", self.origin[2], false, undefined, location );
+    chopper notify( "leaving" );
+    chopper notify( "delete" );
+    decrementFauxVehicleCount();
+    chopper delete();
+}
