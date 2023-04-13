@@ -636,6 +636,7 @@ nacto(weapon)
     self giveweapon(weapon);
     self SwitchToWeapon(weapon);
     waitframe();
+    waitframe();
     self giveweapongood(current);
 }
 
