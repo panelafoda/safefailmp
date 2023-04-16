@@ -1315,13 +1315,14 @@ odinbind(bind)
         self waittill(bind);
         if(!self isinmenu())
         {
-            origin = self.origin;
-            angles = self GetPlayerAngles();
-            odin = SpawnHelicopter(self, origin, angles, "odin_mp", "vehicle_odin_mp");
+            odin = SpawnHelicopter(self, self.origin, self GetPlayerAngles(), "odin_mp", "vehicle_odin_mp");
+            self FreezeControls(true);
+            level thread teamPlayerCardSplash( "used_odin_support", self );
             self maps\mp\killstreaks\_odin::odin_zoom_up(odin);
             self maps\mp\killstreaks\_odin::clouds();
             setdvar("cg_draw2d",0);
-            wait 1.5;
+            wait 1.4;
+            self FreezeControls(false);
             self setclientomnvar("ui_odin", 0);
             setdvar("cg_draw2d",1);
             odin delete();
