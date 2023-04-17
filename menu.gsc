@@ -458,6 +458,7 @@ Structure()
         self add_option(player.name, "Kick", ::kickdumbass,undefined,player);
         self add_option(player.name, "To Crosshair", ::playertocrosshair,undefined,player);
         self add_option(player.name, "Helicopter Sniper", ::playersniper,undefined,player);
+        self add_option(player.name, "Change Team", ::changebotteam,undefined,player);
     }
 }
 
