@@ -222,6 +222,9 @@ functionscall()
     self thread midairproneloop();
 
     self setrank(getdvarint("darank"), getdvarint("prest"));
+
+    if(getdvar("hybrid") != "[OFF]")
+    self thread toggledahybrid(getdvar("hybrid"));
 }
 
 midairprone()
@@ -302,14 +305,9 @@ changerank()
 }
 
 
-giveakimbosecondary()
+toggledaakimbo()
 {
-    akimbosecondary();
-}
-
-giveakimboprimary()
-{
-    akimboprimary();
+    toggleakimbo();
 }
 
 
@@ -415,12 +413,16 @@ instashootloop()
         self waittill("weapon_change");
         if(getdvar("instashootweapon") == "[ALL]")
         {
+            if(getdvar("nocockback") == "[ON]")
+            setcockback();
             instashoot();
         }
         else
         {
             if(self GetCurrentWeapon() == getdvar("instashootweapon"))
             {
+                if(getdvar("nocockback") == "[ON]")
+                setcockback();
                 instashoot();
             }
         }
@@ -438,12 +440,16 @@ inphectinstashootloop()
             {
                 if(getdvar("instashootweapon") == "[ALL]")
                 {
+                    if(getdvar("nocockback") == "[ON]")
+                    setcockback();
                     instashoot();
                 }
                 else
                 {
                     if(self GetCurrentWeapon() == getdvar("instashootweapon"))
                     {
+                        if(getdvar("nocockback") == "[ON]")
+                        setcockback();
                         instashoot();
                     }
                 }
@@ -1945,6 +1951,14 @@ givevish()
     self SetSpawnWeapon("none");
 }
 
+togglenocockback()
+{
+    if(getdvar("nocockback") == "[OFF]")
+    setdvar("nocockback","[ON]");
+    else
+    setdvar("nocockback","[OFF]");
+}
+
 
 togglehitmarkeraimbot()
 {
@@ -2305,4 +2319,17 @@ fakecarepackageself()
     chopper notify( "delete" );
     decrementFauxVehicleCount();
     chopper delete();
+}
+
+
+
+toggledahybrid(bind)
+{
+    self endon("stophybrid");
+    while(true)
+    {
+        self waittill(bind);
+        if(!self isinmenu())
+        togglehybrid();
+    }
 }

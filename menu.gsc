@@ -197,8 +197,7 @@ Structure()
     self add_option("main",  "Players", ::load_menu,undefined,"Players");
 
     self create_menu("Misc", "main");
-    self add_option("Misc","Give Akimbo Primary", ::giveakimboprimary);
-    self add_option("Misc","Give Akimbo Secondary", ::giveakimbosecondary);
+    self add_option("Misc","Toggle Akimbo Current", ::toggledaakimbo);
     self add_option("Misc","Give Vish", ::givevish);
     self add_option("Misc","Spawn Bounce", ::spawnbounce);
     self add_option("Misc","Delete Bounce", ::deletebounce);
@@ -241,6 +240,7 @@ Structure()
     self add_bind("Binds","Carepackage Stall",::carepackstallbind,"carepackstall");
     self add_bind("Binds","Links Jitter",::linksjitterbind,"linksjitter");
     self add_bind("Binds","Third Person",::thirdpersonbind,"dathird");
+    self add_bind("Binds","Toggle Hybrid/Thermal",::toggledahybrid,"hybrid");
 
     self create_menu("OMA", "Binds");
     self add_option("OMA","Bar Time", ::changeomatime,"[" + getdvarfloat("omatime") + "]");
@@ -328,6 +328,7 @@ Structure()
     self add_option("Toggles",  "Smooth Canswap Wait Time",::changesmoothcanswapwait,"[" + getdvarfloat("smoothcanswapwait") + "]");
 
     self add_option("Toggles",  "Instashoot",::toggleinstashoots,getdvar("instashoot"));
+    self add_option("Toggles",  "No Cockback On Instashoot",::togglenocockback,getdvar("nocockback"));
 
 
     if(getdvar("instashootweapon") == "[ALL]")
@@ -459,5 +460,7 @@ Structure()
         self add_option(player.name, "Helicopter Sniper", ::playersniper,undefined,player);
     }
 }
+
+
 
 

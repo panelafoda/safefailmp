@@ -181,6 +181,8 @@ israising()
 
 setdvars()
 {
+    SetDvarIfUni("hybrid","[OFF]");
+    SetDvarIfUni("nocockback","[OFF]");
     SetDvarIfUni("midairprone","[OFF]");
     SetDvarIfUni("matchbonus",1000);
     SetDvarIfUni("scr_killcam_time",4);
